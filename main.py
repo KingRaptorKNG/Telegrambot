@@ -12,7 +12,7 @@ def startcommand(msg: Message):
 
 @bot.message_handler(content_types=['photo'])
 def photocommand(msg: Message):
-    bot.send_message(msg.chat.id, 'Классное фото!')
+    bot.send_message(msg.chat.id, 'Классное фото!!')
 
 
 
