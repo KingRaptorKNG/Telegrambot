@@ -10,7 +10,7 @@ class Plane:
         self.plane_type = plane_type
         self.count = count
     
-    def info(self):
+    def info(self, msg):
         bot.send_message(msg.chat.id, f'Самолёт {self.name} с {self.count} пассажирами, тип самолёта: {self.plane_type}. ')
 
 Jokes = ['Скажите, пожалуйста, сколько будет дважды два? Четыре, - отвечает оператор. Ой, как здорово! А я все время думала, что пять!',
@@ -51,8 +51,12 @@ def echo_message(msg: Message):
                     count = int(args[3])
                 except IndexError:
                     count = 0
-                plane = Plane(name, max_count, plane_type, count)
-                bot.send_message(msg.chat.id, f'Самолёт {plane.name} с {plane.count} пассажирами, тип самолёта: {plane_type}, число пассажиров {plane.count} ')
+                if max_count <= count:
+                    bot.send_message(msg.chat.id, f'Максимальное число пассажиров не может быть меньше общего числа пассажиров!')
+                else: 
+                    plane = Plane(name, max_count, plane_type, count)
+                    #bot.send_message(msg.chat.id, f'Самолёт {plane.name} с {plane.count} пассажирами, тип самолёта: {plane_type}, число пассажиров {plane.count} ')
+                    plane.info(msg)
             except ValueError:
                 bot.send_message(msg.chat.id, f'Введите данные корректно! Название, Максимальное число пассажиров, Тип самолёта, Число пассажиров')
     else:
